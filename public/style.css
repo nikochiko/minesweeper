@@ -8,12 +8,29 @@
     height: 2em;
 }
 
+#minesweeper {
+    margin: 0 auto;
+    max-width: 320px;
+}
+
 .row {
     display: flex;
     justify-content: center;
 }
 
 .reset {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1em;
+}
+
+.game-footer {
     display: flex;
     justify-content: center;
     margin-top: 1em;

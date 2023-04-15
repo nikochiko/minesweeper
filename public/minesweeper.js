@@ -51,12 +51,68 @@ class Minesweeper {
 
     initDiv () {
         this.div.innerHTML = "";
-        this.div.appendChild(makeGrid(
+
+        let gameHeader = document.createElement("div");
+        gameHeader.setAttribute("class", "game-header");
+
+        let minesCount = document.createElement("div");
+        minesCount.setAttribute("class", "mines-count");
+        minesCount.setAttribute("id", "mines-count");
+        minesCount.innerHTML = "💣 " + this.mines;
+
+        let flagCount = document.createElement("div");
+        flagCount.setAttribute("class", "flag-count");
+        flagCount.setAttribute("id", "flag-count");
+        flagCount.innerHTML = "🚩 " + this.mines + " / " + this.mines;
+
+        gameHeader.appendChild(minesCount);
+        gameHeader.appendChild(flagCount);
+
+        let gameBody = document.createElement("div");
+        gameBody.appendChild(makeGrid(
             this.height,
             this.width,
             this.handleClick.bind(this),
             this.handleRightClick.bind(this)
         ));
+
+        let resetBtn = document.createElement("button");
+        resetBtn.innerHTML = "Reset";
+        resetBtn.addEventListener("click", this.initDiv.bind(this));
+
+        let gameFooter = document.createElement("div");
+        gameFooter.setAttribute("class", "game-footer");
+        gameFooter.appendChild(resetBtn);
+
+        this.div.appendChild(gameHeader);
+        this.div.appendChild(gameBody);
+        this.div.appendChild(gameFooter);
+    }
+
+    updateFlagCount () {
+        let flagCount = this.getFlagCount();
+
+        let flagCountDiv = document.getElementById("flag-count");
+        flagCountDiv.innerHTML = "🚩 " + flagCount + " / " + this.mines;
+    }
+
+    getFlagCount () {
+        let count = 0;
+        for (let i = 0; i < this.width; i++) {
+            for (let j = 0; j < this.height; j++) {
+                let cell = this.board.get(i, j);
+                if (cell.isFlag) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    updateMinesCount () {
+        let minesCountDiv = document.getElementById("mines-count");
+        minesCountDiv.innerHTML = "💣 " + this.mines;
     }
 
     handleClick(e, x, y) {
@@ -119,6 +175,9 @@ class Minesweeper {
                 }
             }
         }
+
+        this.updateMinesCount();
+        this.updateFlagCount();
     }
 
     enclosePre (str) {
@@ -425,6 +484,6 @@ function init () {
 }
 
 init ();
-
-let resetBtn = document.getElementById("reset");
-resetBtn.addEventListener("click", () => init() );
+// 
+// let resetBtn = document.getElementById("reset");
+// resetBtn.addEventListener("click", () => init() );
