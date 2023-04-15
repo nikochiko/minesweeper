@@ -63,7 +63,7 @@ class Minesweeper {
         let flagCount = document.createElement("div");
         flagCount.setAttribute("class", "flag-count");
         flagCount.setAttribute("id", "flag-count");
-        flagCount.innerHTML = "🚩 " + this.mines + " / " + this.mines;
+        flagCount.innerHTML = "🚩 " + "0" + " / " + this.mines;
 
         gameHeader.appendChild(minesCount);
         gameHeader.appendChild(flagCount);
