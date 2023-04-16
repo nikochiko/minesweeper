@@ -78,7 +78,7 @@ class Minesweeper {
 
         let resetBtn = document.createElement("button");
         resetBtn.innerHTML = "Reset";
-        resetBtn.addEventListener("click", this.initDiv.bind(this));
+        resetBtn.addEventListener("click", init);
 
         let gameFooter = document.createElement("div");
         gameFooter.setAttribute("class", "game-footer");
